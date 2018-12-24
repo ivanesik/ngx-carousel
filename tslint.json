@@ -1,0 +1,132 @@
+{
+    "rulesDirectory": [
+      "node_modules/codelyzer"
+    ],
+    "rules": {
+      /** SHARED */
+      "no-var-keyword": true,
+      "no-magic-numbers": [true, -1, 0, 1, 2],
+      "no-empty": true, // disable empty code blocks {}
+      "arrow-return-shorthand": true, // Simple Array arrow func should be "x => x++" not a (x) => {return ++x;}
+      "no-empty-interface": true, // disable empty interfaces
+      "no-output-on-prefix": true,
+      "use-input-property-decorator": true,
+      "use-output-property-decorator": true,
+      "no-input-rename": true,
+      "no-output-rename": true,
+      "use-life-cycle-interface": true,
+      "use-pipe-transform-interface": true,
+      "component-class-suffix": true,
+      "directive-class-suffix": true,
+      "no-non-null-assertion": true,
+      "triple-equals": [
+        false,
+        "allow-null-check",
+        "allow-undefined-check"
+      ],
+      /** MODULES */
+      "deprecation": {
+        "severity": "warn"
+      },
+      "import-blacklist": [ // Modules blackList
+        true
+      ],
+      /** Operators, keywords */
+      "no-switch-case-fall-through": true, // disable Switch without Break;
+      "label-position": true, // запрет на использование "break/continue" везде кроме "do/for/while/switch"
+      "no-unused-expression": true, // запрет пустого getter переменной
+      /** Функции, переменные, методы */
+      "no-unnecessary-initializer": true, // не использовать присвоение при определении undefined (example: (fails) var i = undefined)
+      "no-unused-variable": true, // :AutoFix // неиспользуемые переменные, модули, приватные методы
+      "no-eval": true, // запрет использования функции eval (выполнение кода из строки)
+      "no-use-before-declare": true, // запрет использования переменной перед объявлением
+      "no-string-throw": true, // запрет на строковую обработку исключения
+      "no-bitwise": true, // запрет использования побитовых операторов (&, |, >>, ...)
+      "variable-name": [
+        true,
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore"
+      ],
+      /** Классы, интерфейсы, структуры*/
+      "class-name": true, // название классов с большой буквыи без символов вроде '_'
+      "no-duplicate-super": true, // запрет дублирования вызова родительского метода super() в конструкторе
+      "no-misused-new": true, // warning на использование конструктора (new) для интерфейса
+      "no-construct": true, // запрет использования конструктора "new" для типов "String, Number, Boolean"
+      "member-ordering": [ // порядок описание в классе 1) static property 2) property; 3) static method 4) method
+        true,
+        {
+          "order": [
+            "static-field",
+            "instance-field",
+            "static-method",
+            "instance-method"
+          ]
+        }
+      ],
+      /** Форматирование кода */
+      "no-trailing-whitespace": true, // запрет лишних пробелов в конце строк
+      "import-spacing": true, // форматирование import
+      "eofline": true, // проверка что файл заканчивается пустой строкой
+      "no-consecutive-blank-lines": true,
+      "quotemark": [ // запрет на двойные кавычки
+        true,
+        "single",
+        "avoid-escape"
+      ],
+      "one-line": [
+        true,
+        "check-open-brace",
+        "check-catch",
+        "check-whitespace"
+      ],
+      "max-line-length": [ // максимальная длинна строки 150 символов
+        true,
+        160
+      ],
+      "indent": [ // использование для отступов только 4 пробелов (табуляция запрещена)
+        true,
+        "spaces",
+        4
+      ],
+      "semicolon": [
+        true,
+        "always"
+      ],
+      "typedef-whitespace": [ //после объявления переменной и типа нет пробела, до есть
+        true,
+        {
+          "call-signature": "nospace",
+          "index-signature": "nospace",
+          "parameter": "nospace",
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
+        },
+        {
+          "call-signature": "onespace",
+          "index-signature": "onespace",
+          "parameter": "onespace",
+          "property-declaration": "onespace",
+          "variable-declaration": "onespace"
+        }
+      ],
+      "whitespace": [
+        true,
+        "check-branch",
+        "check-decl",
+        "check-operator",
+        "check-module",
+        "check-separator",
+        "check-type",
+        "check-preblock"
+      ],
+      "curly": [
+        true,
+        "as-needed"
+      ],
+      "no-debugger": true,
+      "no-arg": true,
+      "prefer-const": true
+      
+    }
+  }

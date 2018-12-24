@@ -1,0 +1,41 @@
+{
+    "name": "carousels",
+    "version": "1.0.0",
+    "description": "Description",
+    "main": "index.ts",
+    "scripts": {
+        "build": "",
+        "build:p": "",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "repo"
+    },
+    "keywords": [
+        "angular",
+        "images",
+        "carousel"
+    ],
+    "author": "Elioskin Ivan",
+    "license": "MIT",
+    "dependencies": {
+        "@angular/core": "^7.1.4",
+        "rxjs": "^6.3.3",
+        "zone.js": "^0.8.26"
+    },
+    "devDependencies": {
+        "@angular/cli": "^7.1.4",
+        "@angular/common": "^7.1.4",
+        "@angular/compiler": "^7.1.4",
+        "@angular/compiler-cli": "^7.1.4",
+        "@angular-devkit/build-angular": "^0.11.4",
+        "@angular/platform-browser": "^7.1.4",
+        "@angular/platform-browser-dynamic": "^7.1.4",
+        "codelyzer": "~4.5.0",
+        "stylelint": "^9.9.0",
+        "stylelint-order": "^2.0.0",
+        "tslint": "~5.11.0",
+        "typescript": "~3.1.6"
+    }
+}
