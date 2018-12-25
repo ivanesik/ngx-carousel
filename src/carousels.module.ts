@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { RotateCarouselComponent } from './rotate-carousel/rotate-carousel.component';
 import { RotateCarouselItemDirective } from './rotate-carousel/rotate-carousel-item.component';
-import { RotateCarouselItemContentDirective } from './rotate-carousel/rotate-carouse-item-content.component';
 
 @NgModule({
     declarations: [
-        RotateCarouselComponent, RotateCarouselItemDirective, RotateCarouselItemContentDirective
+        RotateCarouselComponent, RotateCarouselItemDirective
     ],
     imports: [
         CommonModule
     ],
     exports: [
-        RotateCarouselComponent, RotateCarouselItemDirective, RotateCarouselItemContentDirective
+        RotateCarouselComponent, RotateCarouselItemDirective
     ]
 })
 export class CarouselModule {}

@@ -1,7 +1,7 @@
 import {
     Component, Input, Output, EventEmitter, ContentChildren, QueryList, ViewChild, ElementRef, AfterContentInit
 } from '@angular/core';
-import { timer } from 'rxjs';
+import { timer, Observable, Subscription } from 'rxjs';
 
 import { RotateCarouselItemDirective } from './rotate-carousel-item.component';
 
@@ -32,7 +32,9 @@ export class RotateCarouselComponent implements AfterContentInit {
     /** Period of carousel rotation */
     @Input() period: number | string = DEFAULT_PERIOD;
 
+    private _period: number;
     private _angleStep: number;
+    private _rotationTimerSubscription: Subscription;
 
     ngAfterContentInit() {
         this.calcItemsAngle();
@@ -52,13 +54,15 @@ export class RotateCarouselComponent implements AfterContentInit {
     }
 
     private setupRotation() {
-        let period: any = this.period;
-        if (Number.isNaN(period % 1)) {
-            const values = period.replace(/\'/g, '').split(/(\d+)/); // split strings like '1003ms' to '1000' and 'ms'
-            period = values[2] == 's' ? values[1] * 1000 : values[1];
+        if (!Number.isNaN(this.period as any % 1))
+            this._period = parseInt(this.period as string);
+        else {
+            const periodStr = this.period as string;
+            const values = periodStr.replace(/\'/g, '').split(/(\d+)/); // split strings like '1003ms' to '1000' and 'ms'
+            this._period = values[2] == 's' ? parseInt(values[1]) * 1000 : parseInt(values[1]);
         }
-        this.carouselInner.nativeElement.style.transition = `transform ${period / 2}ms ease-in-out`;
-        timer(0, period).subscribe(i => {
+        this.carouselInner.nativeElement.style.transition = `transform ${this._period / 2}ms ease-in-out`;
+        this._rotationTimerSubscription = timer(0, this._period).subscribe((i: number) => {
             const angle = i * this._angleStep;
             this.carouselInner.nativeElement.style.transform = `rotateY(${angle}deg)`;
             this.onPanelChange(i % this.rotateItems.length);
@@ -66,7 +70,7 @@ export class RotateCarouselComponent implements AfterContentInit {
     }
 
 //***************************************************************************************************************
-//-Events----------------------------------------------------------------------------------------------
+//-Events--------------------------------------------------------------------------------------------------------
 //***************************************************************************************************************
     private onPanelChange(index: number) {
         this.startRotate.emit(index);
@@ -86,6 +90,21 @@ export class RotateCarouselComponent implements AfterContentInit {
         const depth = this.depth;
         const style = { transform: 'rotateY(' + item.angle + 'deg) translateZ(' + depth + ')' };
         return style;
+    }
+
+//***************************************************************************************************************
+//-Methods-------------------------------------------------------------------------------------------------------
+//***************************************************************************************************************
+    selectAt(index: number) {
+        this._rotationTimerSubscription.unsubscribe();
+        this.carouselInner.nativeElement.style.transform = `rotateY(${index * this._angleStep}deg)`;
+        this._rotationTimerSubscription = timer(0, this._period)
+            .pipe()
+            .subscribe((i: number) => {
+                const angle = i * this._angleStep;
+                this.carouselInner.nativeElement.style.transform = `rotateY(${angle}deg)`;
+                this.onPanelChange(i % this.rotateItems.length);
+            });
     }
 
 }

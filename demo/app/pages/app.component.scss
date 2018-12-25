@@ -15,10 +15,29 @@ section {
 }
 
 code {
+    display: block;
     font-size: 87.5%;
-    font-family: "Courier New", Courier, monospace;
-    color: #e83e8c;
+    font-family: Consolas, "Courier New", monospace;
     word-break: break-word;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, .1);
+
+    &.name {
+        color: #e83e8c;
+    }
+
+    .lt, .gt {
+        color: grey;
+    }
+    .tag-name {
+        color: #569cd6;
+    }
+    .attr-name {
+        color: #9cdcfe;
+    }
+    .attr-value {
+        color: #ce9178;
+    }
 }
 
 .table {
@@ -26,6 +45,10 @@ code {
     max-width: 100%;
     margin-bottom: 1rem;
     background-color: transparent;
+    th {
+        padding: 20px;
+        text-align: left;
+    }
     td {
         border-top: 1px solid rgb(222, 226, 230);
     }
@@ -34,4 +57,13 @@ code {
 .meta {
     margin-bottom: 1rem;
     font-size: .8rem;
+}
+
+img.carousel_item {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    border: 2px solid darkslategrey;
 }

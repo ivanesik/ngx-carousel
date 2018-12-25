@@ -1,17 +1,11 @@
-import { Directive, ContentChild, AfterContentChecked } from '@angular/core';
-import { RotateCarouselItemContentDirective } from './rotate-carouse-item-content.component';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: 'rotate-carousel-item',
+    selector: 'ng-template[rotateCarouselItem]',
 })
-export class RotateCarouselItemDirective implements AfterContentChecked {
+export class RotateCarouselItemDirective {
 
-    @ContentChild(RotateCarouselItemContentDirective) contentTemplate: RotateCarouselItemContentDirective;
-
+    constructor(public templateRef: TemplateRef<any>) { }
     angle: number;
-    contentTpl: RotateCarouselItemContentDirective | null;
 
-    ngAfterContentChecked() {
-        this.contentTpl = this.contentTemplate;
-    }
 }

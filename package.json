@@ -1,23 +1,17 @@
 {
-    "name": "carousels",
+    "name": "ngx-carousel",
     "version": "1.0.0",
-    "description": "Description",
+    "description": "Angular 7 carousels",
+    "author": "Elioskin Ivan",
+    "engines": { "node": ">=8.12.0" },
     "main": "index.ts",
     "scripts": {
-        "build": "",
-        "build:p": "",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "ng-packagr package.json",
+        "build:p": "ng-packagr -p package.json"
     },
-    "repository": {
-        "type": "git",
-        "url": "repo"
-    },
-    "keywords": [
-        "angular",
-        "images",
-        "carousel"
-    ],
-    "author": "Elioskin Ivan",
+    "repository": { "type": "git",  "url": "git+https://github.com/..." },
+    "bugs": { "url": "https://github.com/.../issues" },
+    "keywords": [ "angular", "images", "carousel" ],
     "license": "MIT",
     "dependencies": {
         "@angular/core": "^7.1.4",
@@ -30,9 +24,11 @@
         "@angular/compiler": "^7.1.4",
         "@angular/compiler-cli": "^7.1.4",
         "@angular-devkit/build-angular": "^0.11.4",
+        "@angular-devkit/build-ng-packagr": "^0.11.4",
         "@angular/platform-browser": "^7.1.4",
         "@angular/platform-browser-dynamic": "^7.1.4",
         "codelyzer": "~4.5.0",
+        "ng-packagr": "^4.4.5",
         "stylelint": "^9.9.0",
         "stylelint-order": "^2.0.0",
         "tslint": "~5.11.0",

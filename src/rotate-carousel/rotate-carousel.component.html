@@ -3,7 +3,7 @@
         <div #carouselInner class="carousel__inner">
             <ng-template ngFor let-item [ngForOf]="rotateItems">
                 <div class="carousel__item" [ngStyle]="getItemStyle(item)">
-                    <ng-template [ngTemplateOutlet]="item.contentTpl.templateRef"></ng-template>
+                    <ng-template [ngTemplateOutlet]="item.templateRef"></ng-template>
                 </div>
             </ng-template>
         </div>
