@@ -1,7 +1,9 @@
 {
     "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "./carousel",
+    "dest": "../dist/ngx-carousel",
     "lib": {
+      "flatModuleFile": "ngx-carousel",
       "entryFile": "./index.ts"
     }
   }
+  

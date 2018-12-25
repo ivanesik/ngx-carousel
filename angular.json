@@ -2,7 +2,7 @@
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "version": 1,
     "projects": {
-        "carousel": {
+        "ngx-carousel": {
             "root": "",
             "sourceRoot": "src",
             "projectType": "library",
@@ -10,8 +10,13 @@
                 "build": {
                     "builder": "@angular-devkit/build-ng-packagr:build",
                     "options": {
-                        "tsConfig": "src/tsconfig.app.json",
                         "project": "src/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "src/tsconfig.json",
+                            "project": "src/ng-package.prod.json"
+                        }
                     }
                 }
             }
@@ -29,7 +34,9 @@
                         "main": "demo/main.ts",
                         "polyfills": "demo/polyfills.ts",
                         "tsConfig": "demo/tsconfig.app.json",
-                        "assets": ["demo/assets"]
+                        "assets": [
+                            "demo/assets"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -60,9 +67,13 @@
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": { "browserTarget": "demo:build" },
+                    "options": {
+                        "browserTarget": "demo:build"
+                    },
                     "configurations": {
-                        "production": { "browserTarget": "demo:build:production" }
+                        "production": {
+                            "browserTarget": "demo:build:production"
+                        }
                     }
                 }
             }

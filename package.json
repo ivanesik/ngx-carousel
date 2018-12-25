@@ -3,15 +3,21 @@
     "version": "1.0.0",
     "description": "Angular 7 carousels",
     "author": "Elioskin Ivan",
-    "engines": { "node": ">=8.12.0" },
+    "engines": {
+        "node": ">=8.12.0"
+    },
     "main": "index.ts",
     "scripts": {
-        "build": "ng-packagr package.json",
-        "build:p": "ng-packagr -p package.json"
+        "serve": "ng serve",
+        "build:p": "ng build ngx-carousel --prod"
     },
-    "repository": { "type": "git",  "url": "git+https://github.com/..." },
-    "bugs": { "url": "https://github.com/.../issues" },
-    "keywords": [ "angular", "images", "carousel" ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ivanesik/ngx-carousel"
+    },
+    "bugs": {
+        "url": "https://github.com/ivanesik/ngx-carousel/issues"
+    },
     "license": "MIT",
     "dependencies": {
         "@angular/core": "^7.1.4",
@@ -32,6 +38,7 @@
         "stylelint": "^9.9.0",
         "stylelint-order": "^2.0.0",
         "tslint": "~5.11.0",
+        "tsickle": "^0.33.0",
         "typescript": "~3.1.6"
     }
 }

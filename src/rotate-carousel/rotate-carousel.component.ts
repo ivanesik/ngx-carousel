@@ -79,14 +79,14 @@ export class RotateCarouselComponent implements AfterContentInit {
 //***************************************************************************************************************
 //-Style-Visibility-Availability---------------------------------------------------------------------------------
 //***************************************************************************************************************
-    private getCarouselStyle() {
+    getCarouselStyle() {
         const width = this.width;
         const height = this.height;
         const depth = this.depth;
         return { width: width, height: height, transform: 'translateZ(-' + depth + ')' };
     }
 
-    private getItemStyle(item: RotateCarouselItemDirective) {
+    getItemStyle(item: RotateCarouselItemDirective) {
         const depth = this.depth;
         const style = { transform: 'rotateY(' + item.angle + 'deg) translateZ(' + depth + ')' };
         return style;

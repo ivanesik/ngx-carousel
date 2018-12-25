@@ -2,6 +2,10 @@ section {
     padding: 30px 40px;
 }
 
+h2, h3 {
+    margin: 0;
+}
+
 .title {
 
 }
@@ -16,6 +20,7 @@ section {
 
 code {
     display: block;
+    padding: 10px;
     font-size: 87.5%;
     font-family: Consolas, "Courier New", monospace;
     word-break: break-word;
@@ -23,7 +28,10 @@ code {
     border: 1px solid rgba(255, 255, 255, .1);
 
     &.name {
+        padding: 0;
         color: #e83e8c;
+        background: transparent;
+        border: none;
     }
 
     .lt, .gt {
@@ -46,7 +54,7 @@ code {
     margin-bottom: 1rem;
     background-color: transparent;
     th {
-        padding: 20px;
+        padding: 20px 10px 5px 10px;
         text-align: left;
     }
     td {
