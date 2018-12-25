@@ -1,8 +1,8 @@
 <figure class="carousel">
     <div class="carousel__content" [ngStyle]="getCarouselStyle()">
-        <div class="carousel__inner">
+        <div #carouselInner class="carousel__inner">
             <ng-template ngFor let-item [ngForOf]="rotateItems">
-                <div class="carousel__item" [ngStyle]="getItemStyle(item)"><!--  [ngStyle]="getItemStyle(item)" -->
+                <div class="carousel__item" [ngStyle]="getItemStyle(item)">
                     <ng-template [ngTemplateOutlet]="item.contentTpl.templateRef"></ng-template>
                 </div>
             </ng-template>

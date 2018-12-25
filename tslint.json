@@ -5,7 +5,7 @@
     "rules": {
       /** SHARED */
       "no-var-keyword": true,
-      "no-magic-numbers": [true, -1, 0, 1, 2],
+      "no-magic-numbers": [true, -1, 0, 1, 2, 360, 1000],
       "no-empty": true, // disable empty code blocks {}
       "arrow-return-shorthand": true, // Simple Array arrow func should be "x => x++" not a (x) => {return ++x;}
       "no-empty-interface": true, // disable empty interfaces

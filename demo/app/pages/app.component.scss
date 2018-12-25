@@ -1,0 +1,37 @@
+section {
+    padding: 30px 40px;
+}
+
+.title {
+
+}
+
+.description {
+
+}
+
+.example {
+    border: 1px solid gray;
+}
+
+code {
+    font-size: 87.5%;
+    font-family: "Courier New", Courier, monospace;
+    color: #e83e8c;
+    word-break: break-word;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    td {
+        border-top: 1px solid rgb(222, 226, 230);
+    }
+}
+
+.meta {
+    margin-bottom: 1rem;
+    font-size: .8rem;
+}
