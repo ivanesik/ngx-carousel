@@ -105,7 +105,7 @@
                     <span style="font-size: 2em;">3</span>
                 </div>
             </ng-template>
-<!--             <ng-template rotateCarouselItem>
+            <ng-template rotateCarouselItem>
                 <div style="width: 100%; height: 100%; background-color: darkcyan; display: flex; align-items: center; justify-content: center;">
                     <span style="font-size: 2em;">4</span>
                 </div>
@@ -144,48 +144,6 @@
                 <div style="width: 100%; height: 100%; background-color: springgreen; display: flex; align-items: center; justify-content: center;">
                     <span style="font-size: 2em;">11</span>
                 </div>
-            </ng-template> -->
-        </rotate-carousel>
-    </div>
-</section>
-<!-- <section>
-    <h2>Custom size (height="300px" width="450px")</h2>
-    <div class="description">
-    </div>
-    <code>
-        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span>
-        <span class="attr-name"> height</span>=<span class="attr-value">"300px"</span>
-        <span class="attr-name"> width</span>=<span class="attr-value">"450px"</span><span class="gt">&gt;</span><br>
-        <ng-template ngFor let-i [ngForOf]="' '.repeat(3).split('')">
-            &nbsp;&nbsp;
-            <span class="lt">&lt;</span><span class="tag-name">ng-template</span>
-            <span class="attr-name"> rotateCarouselItem</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="lt">&lt;</span><span class="tag-name">img</span>
-            <span class="attr-name"> src</span>=<span class="attr-value">"..."</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;
-            <span class="lt">&lt;/</span><span class="tag-name">ng-template</span><span class="gt">&gt;</span><br>
-        </ng-template>&nbsp;&nbsp;
-        <span>........</span><br>
-        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span>
-    </code>
-    <div class="example">
-        <rotate-carousel height="300px" width="450px">
-            <ng-template rotateCarouselItem>
-                <img class="carousel_item" src="../../assets/cat1.jpg" alt="">
-            </ng-template>
-            <ng-template rotateCarouselItem>
-                <img class="carousel_item" src="../../assets/cat2.jpg" alt="">
-            </ng-template>
-            <ng-template rotateCarouselItem>
-                <img class="carousel_item" src="../../assets/cat3.jpg" alt="">
-            </ng-template>
-            <ng-template rotateCarouselItem>
-                <img class="carousel_item" src="../../assets/cat1.jpg" alt="">
-            </ng-template>
-            <ng-template rotateCarouselItem>
-                <img class="carousel_item" src="../../assets/cat2.jpg" alt="">
-            </ng-template>
-            <ng-template rotateCarouselItem>
-                <img class="carousel_item" src="../../assets/cat3.jpg" alt="">
             </ng-template>
         </rotate-carousel>
     </div>
@@ -245,4 +203,46 @@
             </ng-template>
         </rotate-carousel>
     </div>
-</section> -->
+</section>
+<section>
+    <h2>Custom settings (height="300px" width="450px" depth="650px" period="2s" direction="reverse")</h2>
+    <div class="description">
+    </div>
+    <code>
+        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span>
+        <span class="attr-name"> height</span>=<span class="attr-value">"300px"</span>
+        <span class="attr-name"> width</span>=<span class="attr-value">"450px"</span><span class="gt">&gt;</span><br>
+        <ng-template ngFor let-i [ngForOf]="' '.repeat(2).split('')">
+            &nbsp;&nbsp;
+            <span class="lt">&lt;</span><span class="tag-name">ng-template</span>
+            <span class="attr-name"> rotateCarouselItem</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="lt">&lt;</span><span class="tag-name">img</span>
+            <span class="attr-name"> src</span>=<span class="attr-value">"..."</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;
+            <span class="lt">&lt;/</span><span class="tag-name">ng-template</span><span class="gt">&gt;</span><br>
+        </ng-template>&nbsp;&nbsp;
+        <span>........</span><br>
+        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span>
+    </code>
+    <div class="example">
+        <rotate-carousel height="300px" width="450px" depth="650px" period="2s" direction="reverse">
+            <ng-template rotateCarouselItem>
+                <img class="carousel_item" src="../../assets/cat1.jpg" alt="">
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <img class="carousel_item" src="../../assets/cat2.jpg" alt="">
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <img class="carousel_item" src="../../assets/cat3.jpg" alt="">
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <img class="carousel_item" src="../../assets/cat1.jpg" alt="">
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <img class="carousel_item" src="../../assets/cat2.jpg" alt="">
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <img class="carousel_item" src="../../assets/cat3.jpg" alt="">
+            </ng-template>
+        </rotate-carousel>
+    </div>
+</section>
