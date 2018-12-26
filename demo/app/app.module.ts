@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './pages/app.component';
 
-import { CarouselModule } from 'ngx-carousel';
+import { CarouselModule } from '../../src/index';
 
 @NgModule({
     declarations: [ AppComponent ],

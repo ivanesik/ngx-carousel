@@ -1,5 +1,5 @@
 {
-    "name": "ngx-carousel",
+    "name": "ngx-carousels",
     "version": "1.0.0",
     "description": "Angular 7 carousels",
     "author": "Elioskin Ivan",
@@ -9,7 +9,7 @@
     "main": "index.ts",
     "scripts": {
         "serve": "ng serve",
-        "build:p": "ng build ngx-carousel --prod"
+        "build:p": "ng build ngx-carousels --prod"
     },
     "repository": {
         "type": "git",

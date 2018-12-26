@@ -1,6 +1,6 @@
 <figure class="carousel">
     <div class="carousel__content" [ngStyle]="getCarouselStyle()">
-        <div #carouselInner class="carousel__inner">
+        <div #carouselInner class="carousel__inner" (transitionend)="onRotateEnd($event)">
             <ng-template ngFor let-item [ngForOf]="rotateItems">
                 <div class="carousel__item" [ngStyle]="getItemStyle(item)">
                     <ng-template [ngTemplateOutlet]="item.templateRef"></ng-template>

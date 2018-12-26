@@ -13,22 +13,27 @@
             <tr>
                 <td><code class="name">width</code></td>
                 <td>Define width of item in carousel</td>
-                <td class="meta">type: string<br>default: 500px</td>
+                <td class="meta">type: string<br>default: 300px</td>
             </tr>
             <tr>
                 <td><code class="name">height</code></td>
                 <td>Define height of item in carousel</td>
-                <td class="meta">type: string<br>default: 500px</td>
+                <td class="meta">type: string<br>default: 200px</td>
             </tr>
             <tr>
                 <td><code class="name">depth</code></td>
                 <td>Define depth of the radius carousel</td>
-                <td class="meta">type: string<br>default: 600px</td>
+                <td class="meta">type: string<br>default: 510px</td>
             </tr>
             <tr>
                 <td><code class="name">period</code></td>
-                <td>Period of item change. Number in ms or string (ex. '30s')</td>
+                <td>Period of item change. Number value in ms or string (ex. '30s' or '3000ms')</td>
                 <td class="meta">type: number | string<br>default: 3500 (3500ms)</td>
+            </tr>
+            <tr>
+                <td><code class="name">direction</code></td>
+                <td>Rotate direction</td>
+                <td class="meta">'forward' or 'reverse'</td>
             </tr>
         </tbody>
         <thead>
@@ -40,12 +45,16 @@
         </thead>
         <tbody>
             <tr>
-                <td><code class="name">startRotate(index: number)</code></td>
-                <td>
-                    <p>Emit event whet panel start rotation with index of rotate item</p>
-                </td>
+                <td><code class="name">rotationStart(index: number)</code></td>
+                <td>Emit event whet panel start rotation with index of rotate item</td>
+                <td></td>
             </tr>
         </tbody>
+        <tr>
+            <td><code class="name">rotationEnd(index: number)</code></td>
+            <td>Emit event whet panel start rotation with index of rotate item</td>
+            <td></td>
+        </tr>
         <thead>
             <tr>
                 <th colspan="2">
@@ -56,9 +65,8 @@
         <tbody>
             <tr>
                 <td><code class="name">startRotate(index: number)</code></td>
-                <td>
-                    <p>Emit event whet panel start rotation with index of rotate item</p>
-                </td>
+                <td>Emit event whet panel start rotation with index of rotate item</td>
+                <td></td>
             </tr>
         </tbody>
     </table>
@@ -66,6 +74,20 @@
 <section id="base-usage">
     <h2>Simple usage</h2>
     <div class="description"></div>
+    <code>
+        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span><br>
+        <ng-template ngFor let-i [ngForOf]="' '.repeat(3).split('')">
+            &nbsp;&nbsp;
+            <span class="lt">&lt;</span><span class="tag-name">ng-template</span>
+            <span class="attr-name"> rotateCarouselItem</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="lt">&lt;</span><span class="tag-name">div</span><span class="attr-name"> style</span>=
+            <span class="attr-value">"width: 100%; height: 100%; background-color: ..."</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="lt">&lt;/</span><span class="tag-name">div</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;
+            <span class="lt">&lt;/</span><span class="tag-name">ng-template</span><span class="gt">&gt;</span><br>
+        </ng-template>&nbsp;&nbsp;
+        <span>........</span><br>
+        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span>
+    </code>
     <div class="example">
         <rotate-carousel>
             <ng-template rotateCarouselItem>
@@ -83,10 +105,50 @@
                     <span style="font-size: 2em;">3</span>
                 </div>
             </ng-template>
+<!--             <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: darkcyan; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">4</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: indianred; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">5</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: thistle; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">6</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: yellow; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">7</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: violet; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">8</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: tomato; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">9</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: slateblue; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">10</span>
+                </div>
+            </ng-template>
+            <ng-template rotateCarouselItem>
+                <div style="width: 100%; height: 100%; background-color: springgreen; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 2em;">11</span>
+                </div>
+            </ng-template> -->
         </rotate-carousel>
     </div>
 </section>
-<section>
+<!-- <section>
     <h2>Custom size (height="300px" width="450px")</h2>
     <div class="description">
     </div>
@@ -183,4 +245,4 @@
             </ng-template>
         </rotate-carousel>
     </div>
-</section>
+</section> -->
