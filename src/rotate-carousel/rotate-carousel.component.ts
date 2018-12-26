@@ -64,7 +64,8 @@ export class RotateCarouselComponent implements AfterContentInit {
             this._period = parseInt(this.period as string);
         else {
             const periodStr = this.period as string;
-            const values = periodStr.replace(/\'/g, '').split(/(\d+)/); // split string like '1003ms' to '1000' and 'ms'
+            const values = periodStr.replace(/\'/g, '').split(/([0-9]*\.?[0-9])/);
+            // split string like '1003ms' to '1000' and 'ms' .replace(/\'/g, '').split(/(\d+)/)
             this._period = values[2] == 's' ? parseInt(values[1]) * 1000 : parseInt(values[1]);
         }
         this._rotationTimerSubscription = this.setRotationTimer();
