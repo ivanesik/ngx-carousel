@@ -9,7 +9,8 @@
     "main": "index.ts",
     "scripts": {
         "serve": "ng serve",
-        "build:p": "ng build ngx-carousels --prod"
+        "build:p": "ng build ngx-carousels --prod",
+        "pack": "npm run build:p && cd dist/ngx-carousels && npm pack"
     },
     "repository": {
         "type": "git",

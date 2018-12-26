@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 
-import { RotateCarouselItemDirective } from './rotate-carousel-item.component';
+import { RotateCarouselItemDirective } from './rotate-carousel-item.directive';
 
 const DEFAULT_WIDTH = '300px';
 const DEFAULT_HEIGHT = '200px';

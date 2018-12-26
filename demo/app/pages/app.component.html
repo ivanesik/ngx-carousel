@@ -1,3 +1,23 @@
+<div>
+    <circle-carousel>
+        <ng-template circleCarouselItem>
+            <div style="height: 500px; background-color: coral; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 2em;">1</span>
+            </div>
+        </ng-template>
+        <ng-template circleCarouselItem>
+            <div style="height: 500px; background-color: darkslateblue; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 2em;">2</span>
+            </div>
+        </ng-template>
+        <ng-template circleCarouselItem>
+            <div style="height: 500px; background-color: mediumseagreen; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 2em;">3</span>
+            </div>
+        </ng-template>
+    </circle-carousel>
+</div>
+
 <h1>Rotation carousel</h1>
 <section id="api">
     <h2>API</h2>
@@ -205,13 +225,16 @@
     </div>
 </section>
 <section>
-    <h2>Custom settings (height="300px" width="450px" depth="650px" period="2.5s" direction="reverse")</h2>
+    <h2>Custom settings (height="300px" width="450px" depth="700px" period="2.5s" direction="reverse")</h2>
     <div class="description">
     </div>
     <code>
         <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span>
         <span class="attr-name"> height</span>=<span class="attr-value">"300px"</span>
-        <span class="attr-name"> width</span>=<span class="attr-value">"450px"</span><span class="gt">&gt;</span><br>
+        <span class="attr-name"> width</span>=<span class="attr-value">"450px"</span>
+        <span class="attr-name"> depth</span>=<span class="attr-value">"700px"</span>
+        <span class="attr-name"> period</span>=<span class="attr-value">"2.5s"</span>
+        <span class="attr-name"> direction</span>=<span class="attr-value">"reverse"</span><span class="gt">&gt;</span><br>
         <ng-template ngFor let-i [ngForOf]="' '.repeat(2).split('')">
             &nbsp;&nbsp;
             <span class="lt">&lt;</span><span class="tag-name">ng-template</span>
@@ -224,7 +247,7 @@
         <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span>
     </code>
     <div class="example">
-        <rotate-carousel height="300px" width="450px" depth="650px" period="2.5s" direction="reverse">
+        <rotate-carousel height="300px" width="450px" depth="700px" period="2.5s" direction="reverse">
             <ng-template rotateCarouselItem>
                 <img class="carousel_item" src="../../assets/cat1.jpg" alt="">
             </ng-template>
