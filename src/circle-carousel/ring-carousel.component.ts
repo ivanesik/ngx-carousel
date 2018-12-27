@@ -1,17 +1,17 @@
-import { Component, Output, ContentChildren, QueryList, EventEmitter, AfterContentInit, ElementRef, ViewChildren, ViewChild } from '@angular/core';
+import { Component, Output, ContentChildren, QueryList, EventEmitter, AfterContentInit, ElementRef, ViewChildren, ViewChild, Input } from '@angular/core';
 import { interval } from 'rxjs';
-import { take, last } from 'rxjs/operators';
+import { take, last, first } from 'rxjs/operators';
 
-import { CircleCarouselItemDirective } from './circle-carousel-item.directive';
+import { RingCarouselItemDirective } from './ring-carousel-item.directive';
 
 @Component({
-    selector: 'circle-carousel',
-    templateUrl: './circle-carousel.component.html',
-    styleUrls: ['./circle-carousel.component.scss']
+    selector: 'ring-carousel',
+    templateUrl: './ring-carousel.component.html',
+    styleUrls: ['./ring-carousel.component.scss']
 })
-export class CircleCarouselComponent implements AfterContentInit {
+export class RingCarouselComponent implements AfterContentInit {
 
-    @ContentChildren(CircleCarouselItemDirective) carouselItems: QueryList<CircleCarouselItemDirective>;
+    @ContentChildren(RingCarouselItemDirective) carouselItems: QueryList<RingCarouselItemDirective>;
 
     @ViewChild('carousel') carouselRef: ElementRef;
     @ViewChildren('expandSvgAnimations') expandAnimations: QueryList<ElementRef>;
@@ -21,20 +21,24 @@ export class CircleCarouselComponent implements AfterContentInit {
     @Output() rotationStart = new EventEmitter<number>();
     /** Emit event of transition end */
     @Output() rotationEnd = new EventEmitter<number>();
+    /** Color of transition rings */
+    @Input() ringColor: string = 'white';
+    /** Count of transition rings */
+    @Input() ringsCount: number = 12;
+    /** Rings duration in ms */
+    @Input() ringsDur: number = 130;
+    /** Flag of transition expand effect */
+    @Input() expandOnTransition: boolean = true;
 
-    private _activeItem: CircleCarouselItemDirective;
+    private _activeItem: RingCarouselItemDirective;
     private _activeIndex: number;
-    /** Count of transition circles */
-    private _ringsCount: number = 12;
     /** Stroke-width of each transition circle */
-    private _strokeWidthStep: number = 20;
+    private _strokeWidthStep: number = 0;
     private _isExpanding: boolean = false;
     private _isCollapsing: boolean = false;
 
     private _cx: number;
     private _cy: number;
-    private _circleDur: number = 100; //ms
-    private _activateList: boolean[] = Array(this._ringsCount);
 
     ngAfterContentInit() {
         this._activeItem = this.carouselItems.first;
@@ -45,35 +49,40 @@ export class CircleCarouselComponent implements AfterContentInit {
 //-User-Interaction----------------------------------------------------------------------------------------------
 //***************************************************************************************************************
     prevItem($event: MouseEvent) {
-        this.showCircles($event.layerX, $event.layerY);
+        this.showRings($event.layerX, $event.layerY);
     }
 
     nextItem($event: MouseEvent) {
-        this.showCircles($event.layerX, $event.layerY);
+        this.showRings($event.layerX, $event.layerY);
     }
 
 //***************************************************************************************************************
 //-Style-Visibility-Availability---------------------------------------------------------------------------------
 //***************************************************************************************************************
-    showCircles(x: number, y: number) {
+    showRings(x: number, y: number) {
         this.calcRingsWidth(x, y);
         this._cx = x;
         this._cy = y;
         this._isExpanding = true;
-        const timer = interval(this._circleDur).pipe(take(this._ringsCount));
+        const timer = interval(this.ringsDur).pipe(take(this.ringsCount));
         timer.subscribe(i => {
             const animation = this.expandAnimations.find((_, index) => i == index);
             animation.nativeElement.beginElement();
         });
         timer.pipe(last()).subscribe(_ => {
-            this._activeIndex = this._activeIndex + 1 < this.carouselItems.length ? this._activeIndex + 1 : 0;
-            this._activeItem = this.carouselItems.find((_, index) => index == this._activeIndex);
-            this.hideRings();
+            interval(this.ringsDur).pipe(first())
+                .subscribe(_ => {
+                    this._activeIndex = this._activeIndex + 1 < this.carouselItems.length ? this._activeIndex + 1 : 0;
+                    this._activeItem = this.carouselItems.find((_, index) => index == this._activeIndex);
+                    this._isExpanding = false;
+                    this.hideRings();
+                });
         });
     }
 
     hideRings() {
-        const timer = interval(this._circleDur).pipe(take(this._ringsCount))
+        this._isCollapsing = true;
+        interval(this.ringsDur).pipe(take(this.ringsCount))
             .subscribe(i => {
                 const animation = this.collapseAnimations.find((_, index) => i == index);
                 animation.nativeElement.beginElement();
@@ -98,7 +107,7 @@ export class CircleCarouselComponent implements AfterContentInit {
             d = Math.sqrt((Math.pow(y, 2) + Math.pow(x1 - x, 2)));
         else
             d = Math.sqrt((Math.pow(y, 2) + Math.pow(x, 2)));
-        this._strokeWidthStep = d / (this._ringsCount - 1);
+        this._strokeWidthStep = d / (this.ringsCount - 1);
     }
 
 }
