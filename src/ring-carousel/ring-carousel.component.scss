@@ -4,6 +4,12 @@
 
 .carousel {
     position: relative;
+    overflow: hidden;
+}
+
+.carousel__inner {
+    transition: transform .8s;
+    z-index: 1;
 }
 
 .control {
@@ -13,10 +19,12 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
+
     .left, .right {
         height: 100%;
         flex: 1;
+        cursor: pointer;
     }
 }
 
@@ -26,6 +34,7 @@
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 3;
 
     svg {
         height: 100%;

@@ -1,6 +1,6 @@
 {
     "name": "ngx-carousels",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Angular 7 carousels",
     "author": "Elioskin Ivan",
     "engines": {
@@ -10,7 +10,8 @@
     "scripts": {
         "serve": "ng serve",
         "build:p": "ng build ngx-carousels --prod",
-        "pack": "npm run build:p && cd dist/ngx-carousels && npm pack"
+        "copy-files": "copy .\\LICENSE .\\dist\\ngx-carousels && copy .\\README.md .\\dist\\ngx-carousels",
+        "pack": "npm run build:p && npm run copy-files && cd dist/ngx-carousels && npm pack"
     },
     "repository": {
         "type": "git",
@@ -40,6 +41,7 @@
         "stylelint-order": "^2.0.0",
         "tslint": "~5.11.0",
         "tsickle": "^0.33.0",
-        "typescript": "~3.1.6"
+        "typescript": "~3.1.6",
+        "tslib": "^1.9.0"
     }
 }

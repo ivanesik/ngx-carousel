@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { RotateCarouselComponent } from './rotate-carousel/rotate-carousel.component';
 import { RotateCarouselItemDirective } from './rotate-carousel/rotate-carousel-item.directive';
-import { RingCarouselComponent } from './circle-carousel/ring-carousel.component';
-import { RingCarouselItemDirective } from './circle-carousel/ring-carousel-item.directive';
+import { RingCarouselComponent } from './ring-carousel/ring-carousel.component';
+import { RingCarouselItemDirective } from './ring-carousel/ring-carousel-item.directive';
 
 @NgModule({
     declarations: [
@@ -15,8 +15,7 @@ import { RingCarouselItemDirective } from './circle-carousel/ring-carousel-item.
         CommonModule
     ],
     exports: [
-        RotateCarouselComponent, RotateCarouselItemDirective,
-        RingCarouselComponent, RingCarouselItemDirective
+        RotateCarouselComponent, RingCarouselComponent, RotateCarouselItemDirective, RingCarouselItemDirective
     ]
 })
 export class CarouselModule {}

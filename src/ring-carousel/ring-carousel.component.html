@@ -1,0 +1,20 @@
+<div #carousel class="carousel">
+    <div class="carousel__inner" [style.transform]="expandOnTransition && (_isExpanding || _isCollapsing) ? 'scale(1.2)' : 'none'">
+        <ng-template [ngTemplateOutlet]="_activeItem.templateRef"></ng-template>
+    </div>
+    <div *ngIf="enableControl" class="control">
+        <div class="left" (click)="prev($event)"></div>
+        <div class="right" (click)="next($event)"></div>
+    </div>
+    <div class="circles" *ngIf="_isExpanding || _isCollapsing">
+        <svg>
+            <ng-template ngFor [ngForOf]="' '.repeat(ringsCount).split('')" let-i="index">
+                <svg:circle [attr.cx]="_cx" [attr.cy]="_cy" [attr.r]="_strokeWidthStep * i + 1" fill="none" [attr.stroke]="ringColor" stroke-width="0">
+                    <animate #expandSvgAnimations attributeName="stroke-width" begin="click" [attr.dur]="ringsDuration + 'ms'" from="0" [attr.to]="_strokeWidthStep + 1" fill="freeze" />
+                    <animate #collapseSvgAnimations attributeName="stroke-width" begin="click" [attr.dur]="ringsDuration + 'ms'" [attr.from]="_strokeWidthStep + 1" to="0" fill="freeze" />
+                </svg:circle>
+            </ng-template>
+        </svg>
+    </div>
+</div>
+

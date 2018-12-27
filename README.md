@@ -21,13 +21,13 @@ here link to example on personal site
 ```
 npm install --save ngx-carousels
 ```
-Import necessary CarouselModule in your AppModule
+Import CarouselModule in your AppModule
 ```js
 import { CarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   ...
-  imports: [CarouselModule, ...],
+  imports: [..., CarouselModule],
   ...
 })
 export class YourAppModule {

@@ -1,6 +1,6 @@
 {
     "name": "ngx-carousels",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "Angular 7 carousels",
     "author": "Elioskin Ivan",
     "keywords": [ "angular", "carousel" ],
@@ -11,6 +11,7 @@
     "bugs": {
         "url": "https://github.com/ivanesik/ngx-carousel/issues"
     },
+    "homepage": "https://github.com/ivanesik/ngx-carousel#readme",
     "license": "MIT",
     "peerDependencies": {
         "@angular/core": "^7.0.0",

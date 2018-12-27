@@ -25,20 +25,24 @@ export class RingCarouselComponent implements AfterContentInit {
     @Input() ringColor: string = 'white';
     /** Count of transition rings */
     @Input() ringsCount: number = 12;
-    /** Rings duration in ms */
-    @Input() ringsDur: number = 130;
+    /** Rings delay in ms */
+    @Input() ringsDelay: number = 130;
+    /** Ring expand/collapse duration in ms */
+    @Input() ringsDuration: number = 800;
     /** Flag of transition expand effect */
     @Input() expandOnTransition: boolean = true;
+    /** Flag of disable control of left and right part click */
+    @Input() enableControl: boolean = true;
 
-    private _activeItem: RingCarouselItemDirective;
     private _activeIndex: number;
+    _activeItem: RingCarouselItemDirective;
     /** Stroke-width of each transition circle */
-    private _strokeWidthStep: number = 0;
-    private _isExpanding: boolean = false;
-    private _isCollapsing: boolean = false;
+    _strokeWidthStep: number = 0;
+    _isExpanding: boolean = false;
+    _isCollapsing: boolean = false;
 
-    private _cx: number;
-    private _cy: number;
+    _cx: number;
+    _cy: number;
 
     ngAfterContentInit() {
         this._activeItem = this.carouselItems.first;
@@ -46,34 +50,52 @@ export class RingCarouselComponent implements AfterContentInit {
     }
 
 //***************************************************************************************************************
-//-User-Interaction----------------------------------------------------------------------------------------------
+//-Api-----------------------------------------------------------------------------------------------------------
 //***************************************************************************************************************
-    prevItem($event: MouseEvent) {
-        this.showRings($event.layerX, $event.layerY);
+    /** Select carousel item at index path */
+    public selectAt(index: number, $event = null): void {
+        this._activeIndex = index;
+        let x: number, y: number;
+        if ($event) {
+            x = $event.layerX;
+            y = $event.layerY;
+        }
+        else {
+            y = this.carouselRef.nativeElement.clientHeight / 2;
+            x = this.carouselRef.nativeElement.clientWidth / 2;
+        }
+        this.showRings(x, y, index);
     }
 
-    nextItem($event: MouseEvent) {
-        this.showRings($event.layerX, $event.layerY);
+    /** Select next carousel item  */
+    public next($event = null): void {
+        this._activeIndex = this._activeIndex + 1 < this.carouselItems.length ? this._activeIndex + 1 : 0;
+        this.selectAt(this._activeIndex, $event);
+    }
+
+    /** Select previous carousel item */
+    public prev($event = null): void {
+        this._activeIndex = this._activeIndex - 1 >= 0 ? this._activeIndex - 1 : this.carouselItems.length - 1;
+        this.selectAt(this._activeIndex, $event);
     }
 
 //***************************************************************************************************************
 //-Style-Visibility-Availability---------------------------------------------------------------------------------
 //***************************************************************************************************************
-    showRings(x: number, y: number) {
+    showRings(x: number, y: number, index: number) {
         this.calcRingsWidth(x, y);
         this._cx = x;
         this._cy = y;
         this._isExpanding = true;
-        const timer = interval(this.ringsDur).pipe(take(this.ringsCount));
-        timer.subscribe(i => {
-            const animation = this.expandAnimations.find((_, index) => i == index);
+        const timer = interval(this.ringsDelay).pipe(take(this.ringsCount));
+        timer.subscribe(timValue => {
+            const animation = this.expandAnimations.find((_, i) => timValue == i);
             animation.nativeElement.beginElement();
         });
         timer.pipe(last()).subscribe(_ => {
-            interval(this.ringsDur).pipe(first())
+            interval(this.ringsDuration).pipe(first())
                 .subscribe(_ => {
-                    this._activeIndex = this._activeIndex + 1 < this.carouselItems.length ? this._activeIndex + 1 : 0;
-                    this._activeItem = this.carouselItems.find((_, index) => index == this._activeIndex);
+                    this._activeItem = this.carouselItems.find((_, i) => i == index);
                     this._isExpanding = false;
                     this.hideRings();
                 });
@@ -82,11 +104,17 @@ export class RingCarouselComponent implements AfterContentInit {
 
     hideRings() {
         this._isCollapsing = true;
-        interval(this.ringsDur).pipe(take(this.ringsCount))
-            .subscribe(i => {
-                const animation = this.collapseAnimations.find((_, index) => i == index);
-                animation.nativeElement.beginElement();
-            });
+        const timer = interval(this.ringsDelay).pipe(take(this.ringsCount));
+        timer.subscribe(i => {
+            const animation = this.collapseAnimations.find((_, index) => i == index);
+            animation.nativeElement.beginElement();
+        });
+        timer.pipe(last()).subscribe(_ => {
+            interval(this.ringsDuration).pipe(first())
+                .subscribe(_ => {
+                    this._isCollapsing = false;
+                });
+        });
     }
 
 //***************************************************************************************************************

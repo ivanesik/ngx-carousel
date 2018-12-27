@@ -1,18 +1,24 @@
 <div>
-    <ring-carousel>
+    <ring-carousel [enableControl]="false" #carousel>
         <ng-template ringCarouselItem>
-            <div style="height: 500px; background-color: coral; display: flex; align-items: center; justify-content: center;">
+            <div style="height: 500px; background-color: coral; display: flex; align-items: center; justify-content: space-evenly;">
+                <button (click)="carousel.prev()">PREV</button>
                 <span style="font-size: 2em;">1</span>
+                <button (click)="carousel.next($event)">NEXT</button>
             </div>
         </ng-template>
         <ng-template ringCarouselItem>
-            <div style="height: 500px; background-color: darkslateblue; display: flex; align-items: center; justify-content: center;">
+            <div style="height: 500px; background-color: darkslateblue; display: flex; align-items: center; justify-content: space-evenly;">
+                <button (click)="carousel.prev()">PREV</button>
                 <span style="font-size: 2em;">2</span>
+                <button (click)="carousel.next()">NEXT</button>
             </div>
         </ng-template>
         <ng-template ringCarouselItem>
-            <div style="height: 500px; background-color: mediumseagreen; display: flex; align-items: center; justify-content: center;">
+            <div style="height: 500px; background-color: mediumseagreen; display: flex; align-items: center; justify-content: space-evenly;">
+                <button (click)="carousel.prev()">PREV</button>
                 <span style="font-size: 2em;">3</span>
+                <button (click)="carousel.next()">NEXT</button>
             </div>
         </ng-template>
     </ring-carousel>
