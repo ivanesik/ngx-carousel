@@ -4,17 +4,17 @@
 --
 
 ## Table of Contents
-<!-- - [Demo](#Demo) -->
+- [Demo](#Demo)
 - [Summary](#Summary)
 - [How to use](#How-to-use)
 - [Todo](#TODO)
 
-<!-- 
-## Demo
-here link to example on personal site
- -->
-## Summary
 
+## Demo
+View [demo](https://ivanesik.github.io/#/ngx-carousels/demo)
+
+## Summary
+Angular 7+ module with carousels. View [docs](https://ivanesik.github.io/#/ngx-carousels/docs)
 
 ## How to use
 #### Installation
@@ -23,7 +23,7 @@ npm install --save ngx-carousels
 ```
 Import CarouselModule in your AppModule
 ```js
-import { CarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselModule } from 'ngx-carousels';
 
 @NgModule({
   ...

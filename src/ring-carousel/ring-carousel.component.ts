@@ -1,4 +1,4 @@
-import { Component, Output, ContentChildren, QueryList, EventEmitter, AfterContentInit, ElementRef, ViewChildren, ViewChild, Input } from '@angular/core';
+import { Component, Output, ContentChildren, QueryList, EventEmitter, AfterContentInit, ElementRef, ViewChildren, ViewChild, Input, OnChanges } from '@angular/core';
 import { interval } from 'rxjs';
 import { take, last, first } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { RingCarouselItemDirective } from './ring-carousel-item.directive';
     templateUrl: './ring-carousel.component.html',
     styleUrls: ['./ring-carousel.component.scss']
 })
-export class RingCarouselComponent implements AfterContentInit {
+export class RingCarouselComponent implements AfterContentInit, OnChanges {
 
     @ContentChildren(RingCarouselItemDirective) carouselItems: QueryList<RingCarouselItemDirective>;
 
@@ -29,9 +29,9 @@ export class RingCarouselComponent implements AfterContentInit {
     @Input() ringsDelay: number = 130;
     /** Ring expand/collapse duration in ms */
     @Input() ringsDuration: number = 800;
-    /** Flag of transition expand effect */
+    /** Expand carousel inner in transition */
     @Input() expandOnTransition: boolean = true;
-    /** Flag of disable control of left and right part click */
+    /** Enable control on left and right part click */
     @Input() enableControl: boolean = true;
 
     private _activeIndex: number;
@@ -49,10 +49,15 @@ export class RingCarouselComponent implements AfterContentInit {
         this._activeIndex = 0;
     }
 
+    ngOnChanges() {
+        if (typeof this.ringsCount == 'string')
+            this.ringsCount = parseInt(this.ringsCount as string);
+    }
+
 //***************************************************************************************************************
 //-Api-----------------------------------------------------------------------------------------------------------
 //***************************************************************************************************************
-    /** Select carousel item at index path */
+    /** Turns the carousel to the item with the index path */
     public selectAt(index: number, $event = null): void {
         this._activeIndex = index;
         let x: number, y: number;

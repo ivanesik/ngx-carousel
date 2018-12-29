@@ -1,6 +1,6 @@
 {
     "name": "ngx-carousels",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Angular 7 carousels",
     "author": "Elioskin Ivan",
     "keywords": [ "angular", "carousel" ],
