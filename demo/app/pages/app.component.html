@@ -1,5 +1,6 @@
+<h1>Rings carousel</h1>
 <div>
-    <ring-carousel [enableControl]="false" ringsCount="5" #carousel>
+    <ring-carousel [enableControl]="false" #carousel>
         <ng-template ringCarouselItem>
             <div style="height: 500px; background-color: coral; display: flex; align-items: center; justify-content: space-evenly;">
                 <button (click)="carousel.prev()">PREV</button>
@@ -25,97 +26,11 @@
 </div>
 
 <h1>Rotation carousel</h1>
-<section id="api">
-    <h2>API</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th colspan="2">
-                    <h3>Inputs</h3>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code class="name">width</code></td>
-                <td>Define width of item in carousel</td>
-                <td class="meta">type: string<br>default: 300px</td>
-            </tr>
-            <tr>
-                <td><code class="name">height</code></td>
-                <td>Define height of item in carousel</td>
-                <td class="meta">type: string<br>default: 200px</td>
-            </tr>
-            <tr>
-                <td><code class="name">depth</code></td>
-                <td>Define depth of the radius carousel</td>
-                <td class="meta">type: string<br>default: 510px</td>
-            </tr>
-            <tr>
-                <td><code class="name">period</code></td>
-                <td>Period of item change. Number value in ms or string (ex. '30s' or '3000ms')</td>
-                <td class="meta">type: number | string<br>default: 3500 (3500ms)</td>
-            </tr>
-            <tr>
-                <td><code class="name">direction</code></td>
-                <td>Rotate direction</td>
-                <td class="meta">'forward' or 'reverse'</td>
-            </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th colspan="2">
-                    <h3>Output</h3>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code class="name">rotationStart(index: number)</code></td>
-                <td>Emit event whet panel start rotation with index of rotate item</td>
-                <td></td>
-            </tr>
-        </tbody>
-        <tr>
-            <td><code class="name">rotationEnd(index: number)</code></td>
-            <td>Emit event whet panel start rotation with index of rotate item</td>
-            <td></td>
-        </tr>
-        <thead>
-            <tr>
-                <th colspan="2">
-                    <h3>Methods</h3>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code class="name">startRotate(index: number)</code></td>
-                <td>Emit event whet panel start rotation with index of rotate item</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-</section>
 <section id="base-usage">
     <h2>Simple usage</h2>
-    <div class="description"></div>
-    <code>
-        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span><br>
-        <ng-template ngFor let-i [ngForOf]="' '.repeat(3).split('')">
-            &nbsp;&nbsp;
-            <span class="lt">&lt;</span><span class="tag-name">ng-template</span>
-            <span class="attr-name"> rotateCarouselItem</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="lt">&lt;</span><span class="tag-name">div</span><span class="attr-name"> style</span>=
-            <span class="attr-value">"width: 100%; height: 100%; background-color: ..."</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="lt">&lt;/</span><span class="tag-name">div</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;
-            <span class="lt">&lt;/</span><span class="tag-name">ng-template</span><span class="gt">&gt;</span><br>
-        </ng-template>&nbsp;&nbsp;
-        <span>........</span><br>
-        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span>
-    </code>
+    <input #period type="number" value="3500" />
     <div class="example">
-        <rotate-carousel>
+        <rotate-carousel [period]="period.value">
             <ng-template rotateCarouselItem>
                 <div style="width: 100%; height: 100%; background-color: coral; display: flex; align-items: center; justify-content: center;">
                     <span style="font-size: 2em;">1</span>
@@ -174,7 +89,7 @@
         </rotate-carousel>
     </div>
 </section>
-<section>
+<!-- <section>
     <h2>Custom depth (170px, 600px)</h2>
     <div class="description"></div>
     <div class="example" style="display: flex;">
@@ -234,24 +149,6 @@
     <h2>Custom settings (height="300px" width="450px" depth="700px" period="2.5s" direction="reverse")</h2>
     <div class="description">
     </div>
-    <code>
-        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span>
-        <span class="attr-name"> height</span>=<span class="attr-value">"300px"</span>
-        <span class="attr-name"> width</span>=<span class="attr-value">"450px"</span>
-        <span class="attr-name"> depth</span>=<span class="attr-value">"700px"</span>
-        <span class="attr-name"> period</span>=<span class="attr-value">"2.5s"</span>
-        <span class="attr-name"> direction</span>=<span class="attr-value">"reverse"</span><span class="gt">&gt;</span><br>
-        <ng-template ngFor let-i [ngForOf]="' '.repeat(2).split('')">
-            &nbsp;&nbsp;
-            <span class="lt">&lt;</span><span class="tag-name">ng-template</span>
-            <span class="attr-name"> rotateCarouselItem</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="lt">&lt;</span><span class="tag-name">img</span>
-            <span class="attr-name"> src</span>=<span class="attr-value">"..."</span><span class="gt">&gt;</span><br>&nbsp;&nbsp;
-            <span class="lt">&lt;/</span><span class="tag-name">ng-template</span><span class="gt">&gt;</span><br>
-        </ng-template>&nbsp;&nbsp;
-        <span>........</span><br>
-        <span class="lt">&lt;</span><span class="tag-name">rotate-carousel</span><span class="gt">&gt;</span>
-    </code>
     <div class="example">
         <rotate-carousel height="300px" width="450px" depth="700px" period="2.5s" direction="reverse">
             <ng-template rotateCarouselItem>
@@ -274,4 +171,4 @@
             </ng-template>
         </rotate-carousel>
     </div>
-</section>
+</section> -->

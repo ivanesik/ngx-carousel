@@ -1,5 +1,5 @@
 import {
-    Component, Input, Output, EventEmitter, ContentChildren, QueryList, ViewChild, ElementRef, AfterContentInit
+    Component, Input, Output, EventEmitter, ContentChildren, QueryList, ViewChild, ElementRef, AfterContentInit, OnChanges
 } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 
@@ -17,7 +17,7 @@ const FULL_ANGLE = 360;
     templateUrl: './rotate-carousel.component.html',
     styleUrls: ['./rotate-carousel.component.scss']
 })
-export class RotateCarouselComponent implements AfterContentInit {
+export class RotateCarouselComponent implements AfterContentInit, OnChanges {
 
     @ContentChildren(RotateCarouselItemDirective) rotateItems: QueryList<RotateCarouselItemDirective>;
     @ViewChild('carouselInner') carouselInner: ElementRef;
@@ -44,6 +44,9 @@ export class RotateCarouselComponent implements AfterContentInit {
 
     ngAfterContentInit() {
         this.calcItemsAngle();
+    }
+
+    ngOnChanges() {
         this.setupRotation();
     }
 
@@ -64,10 +67,12 @@ export class RotateCarouselComponent implements AfterContentInit {
             this._period = parseInt(this.period as string);
         else {
             const periodStr = this.period as string;
+             // split string like '1003ms' to '1000' and 'ms' .replace(/\'/g, '').split(/(\d+)/)
             const values = periodStr.replace(/\'/g, '').split(/([0-9]*\.?[0-9])/);
-            // split string like '1003ms' to '1000' and 'ms' .replace(/\'/g, '').split(/(\d+)/)
             this._period = values[2] == 's' ? parseInt(values[1]) * 1000 : parseInt(values[1]);
         }
+        if (this._rotationTimerSubscription)
+            this._rotationTimerSubscription.unsubscribe();
         this._rotationTimerSubscription = this.setRotationTimer();
     }
 
