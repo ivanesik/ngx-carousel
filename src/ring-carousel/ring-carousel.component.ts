@@ -1,4 +1,6 @@
-import { Component, Output, ContentChildren, QueryList, EventEmitter, AfterContentInit, ElementRef, ViewChildren, ViewChild, Input, OnChanges } from '@angular/core';
+import {
+    Component, Output, ContentChildren, QueryList, EventEmitter, AfterContentInit, ElementRef, ViewChildren, ViewChild, Input, OnChanges
+} from '@angular/core';
 import { interval } from 'rxjs';
 import { take, last, first } from 'rxjs/operators';
 
@@ -18,9 +20,9 @@ export class RingCarouselComponent implements AfterContentInit, OnChanges {
     @ViewChildren('collapseSvgAnimations') collapseAnimations: QueryList<ElementRef>;
 
     /** Emit event of transition start */
-    @Output() rotationStart = new EventEmitter<number>();
+    @Output() transitionStart = new EventEmitter<number>();
     /** Emit event of transition end */
-    @Output() rotationEnd = new EventEmitter<number>();
+    @Output() transitionEnd = new EventEmitter<number>();
     /** Color of transition rings */
     @Input() ringColor: string = 'white';
     /** Count of transition rings */
@@ -94,6 +96,7 @@ export class RingCarouselComponent implements AfterContentInit, OnChanges {
         this._isExpanding = true;
         const timer = interval(this.ringsDelay).pipe(take(this.ringsCount));
         timer.subscribe(timValue => {
+            this.transitionStart.emit(index);
             const animation = this.expandAnimations.find((_, i) => timValue == i);
             animation.nativeElement.beginElement();
         });
@@ -118,6 +121,7 @@ export class RingCarouselComponent implements AfterContentInit, OnChanges {
             interval(this.ringsDuration).pipe(first())
                 .subscribe(_ => {
                     this._isCollapsing = false;
+                    this.transitionEnd.emit(this._activeIndex);
                 });
         });
     }
