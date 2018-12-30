@@ -1,5 +1,6 @@
 import {
-    Component, Input, Output, EventEmitter, ContentChildren, QueryList, ViewChild, ElementRef, AfterContentInit, OnChanges
+    Component, Input, Output, EventEmitter, ContentChildren, QueryList, ViewChild, ElementRef,
+    AfterContentInit, OnChanges
 } from '@angular/core';
 import { timer, Subscription } from 'rxjs';
 
@@ -44,6 +45,7 @@ export class RotateCarouselComponent implements AfterContentInit, OnChanges {
 
     ngAfterContentInit() {
         this.calcItemsAngle();
+        this.setupRotation();
     }
 
     ngOnChanges() {
