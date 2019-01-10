@@ -46,10 +46,12 @@ export class RotateCarouselComponent implements AfterContentInit, OnChanges {
     ngAfterContentInit() {
         this.calcItemsAngle();
         this.setupRotation();
+        //this.calcHeight();
     }
 
     ngOnChanges() {
         this.setupRotation();
+        //this.calcHeight();
     }
 
 //***************************************************************************************************************
@@ -69,7 +71,7 @@ export class RotateCarouselComponent implements AfterContentInit, OnChanges {
             this._period = parseInt(this.period as string);
         else {
             const periodStr = this.period as string;
-             // split string like '1003ms' to '1000' and 'ms' .replace(/\'/g, '').split(/(\d+)/)
+            // split string like '1003ms' to '1000' and 'ms'
             const values = periodStr.replace(/\'/g, '').split(/([0-9]*\.?[0-9])/);
             this._period = values[2] == 's' ? parseInt(values[1]) * 1000 : parseInt(values[1]);
         }
@@ -78,10 +80,16 @@ export class RotateCarouselComponent implements AfterContentInit, OnChanges {
         this._rotationTimerSubscription = this.setRotationTimer();
     }
 
+    private calcHeight() {
+        const maxH =  Math.max(null, ...this.rotateItems.map(x => x.templateRef.elementRef.nativeElement.clientHeight));
+        if (!this.height)
+            this.height = maxH + 'px';
+    }
+
 //***************************************************************************************************************
 //-Events--------------------------------------------------------------------------------------------------------
 //***************************************************************************************************************
-    onRotationStart() {
+    private onRotationStart() {
         this.rotationStart.emit(this._activeIndex);
     }
 
