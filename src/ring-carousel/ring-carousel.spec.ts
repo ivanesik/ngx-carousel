@@ -11,6 +11,7 @@ const CUSTOM_RING_COUNT = 15;
 const CUSTOM_RING_DELAY = 150;
 const CUSTOM_RING_DURATION = 1000;
 
+// Default usage of component
 describe('Default works', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -24,6 +25,7 @@ describe('Default works', () => {
         </ng-template>
     </ring-carousel>`;
 
+    // Async part of preparation function
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
@@ -32,12 +34,14 @@ describe('Default works', () => {
         TestBed.overrideTemplate(TestComponent, html);
     }));
 
+    // Sync part of preparation function
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
+    // Tests
     it('should be initialized with defaults', () => {
         expect(component.carousel).toBeDefined();
         expect(component.carousel.ringColor).toBe('white');
@@ -49,6 +53,7 @@ describe('Default works', () => {
     });
 });
 
+// Custom setup of component
 describe('Custom settings', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -89,16 +94,60 @@ describe('Custom settings', () => {
 });
 
 describe('Emit outputs:', () => {
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
+    const html = `
+    <ring-carousel (transitionStart)="onTransitionStart()" (transitionEnd)="onTransitionEnd()">
+        <ng-template ringCarouselItem>
+            1
+        </ng-template>
+        <ng-template ringCarouselItem>
+            2
+        </ng-template>
+    </ring-carousel>`;
+
+    // Async part of preparation function
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [CarouselModule]
+        });
+        TestBed.overrideTemplate(TestComponent, html);
+    }));
+
+    // Sync part of preparation function
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+    // Tests
+    it('should be initialized with defaults', () => {
+        component.carousel.next();
+        async(() => (expect(component.checkTransitionStart).toBe(true)));
+    });
 });
 
 describe('Manual control:', () => {
+    null;
 });
 
-//** Component for testing carousel in his template */
+/** Component for testing carousel in his template */
 @Component({
     selector: 'test',
     template: ''
 })
 class TestComponent {
     @ViewChild(RingCarouselComponent) carousel: RingCarouselComponent;
+
+    checkTransitionStart: boolean = false;
+    checkTransitionEnd: boolean = false;
+
+    onTransitionStart() {
+        this.checkTransitionStart = true;
+    }
+    onTransitionEnd() {
+        this.checkTransitionEnd = true;
+    }
+
 }

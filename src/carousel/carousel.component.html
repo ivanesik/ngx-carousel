@@ -1,0 +1,7 @@
+<div class="carousel">
+    <ng-template ngFor let-item [ngForOf]="carouselInners">
+        <div #carouselItems class="carousel__item">
+            <ng-template [ngTemplateOutlet]="item.templateRef"></ng-template>
+        </div>
+    </ng-template>
+</div>

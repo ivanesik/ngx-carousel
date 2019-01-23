@@ -55,7 +55,7 @@ export class RotateCarouselComponent implements AfterContentInit, OnChanges {
     }
 
 //***************************************************************************************************************
-//-Setup----------------------------------------------------------------------------------------------------------
+//-Setup---------------------------------------------------------------------------------------------------------
 //***************************************************************************************************************
     private calcItemsAngle() {
         this._angleStep = FULL_ANGLE / this.rotateItems.length;
@@ -120,9 +120,9 @@ export class RotateCarouselComponent implements AfterContentInit, OnChanges {
 //***************************************************************************************************************
 //-Methods-------------------------------------------------------------------------------------------------------
 //***************************************************************************************************************
-    selectAt(index: number) {
+    selectAt(indexPath: number) {
         this._rotationTimerSubscription.unsubscribe();
-        this.carouselInner.nativeElement.style.transform = `rotateY(${index * this._angleStep}deg)`;
+        this.carouselInner.nativeElement.style.transform = `rotateY(${indexPath * this._angleStep}deg)`;
         this._rotationTimerSubscription = this.setRotationTimer();
     }
 

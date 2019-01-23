@@ -1,0 +1,16 @@
+.carousel {
+}
+
+.carousel__item {
+    display: none;
+
+    &.active {
+        display: block;
+        transition: transform 1s ease-in-out;
+    }
+
+    &.next {
+    }
+    &.pervious {
+    }
+}
