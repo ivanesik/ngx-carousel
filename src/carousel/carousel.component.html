@@ -1,4 +1,4 @@
-<div class="carousel">
+<div class="carousel" [style.position]="animationType == 'none' ? 'static' : 'relative'">
     <ng-template ngFor let-item [ngForOf]="carouselInners">
         <div #carouselItems class="carousel__item">
             <ng-template [ngTemplateOutlet]="item.templateRef"></ng-template>

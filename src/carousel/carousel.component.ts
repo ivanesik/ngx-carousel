@@ -1,88 +1,120 @@
-import { Component, QueryList, ContentChildren, Input, OnChanges, AfterContentInit, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
-import { timer, Observable, Subscriber, Subscription } from 'rxjs';
+import { Component, QueryList, ContentChildren, Input, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
+import { Subscription, interval } from 'rxjs';
 
 import { CarouselItemDirective } from './carousel-item.directive';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'carousel',
     templateUrl: 'carousel.component.html',
     styleUrls: ['carousel.component.scss']
 })
-export class CarouselComponent implements OnChanges, AfterViewInit {
+export class CarouselComponent implements AfterViewInit {
 
     @ContentChildren(CarouselItemDirective) carouselInners: QueryList<CarouselItemDirective>;
     @ViewChildren('carouselItems') carouselItems: QueryList<ElementRef<HTMLElement>>;
 
-    /** Enable control  */
-    @Input() bottomControl: boolean = true;
     /** Enable autoChange of carousel items */
-    @Input() autochange: boolean = true;
+    @Input() autochange: boolean = false;
     /** Enable transit animation */
-    @Input() animationType: 'none' | 'slide' | 'fade' = 'none';
+    @Input() animationType: 'none' | 'fade' = 'none';
     /** Period for autoChange */
     @Input() period: number = 5000;
 
     private _activeIndex: number = 0;
     private _subscriber: Subscription;
-
-    ngOnChanges() {
-    }
+    private _isAnimation: boolean = false;
 
     ngAfterViewInit() {
         this.setupCarousel();
     }
 
-//***************************************************************************************************************
-//-Setup---------------------------------------------------------------------------------------------------------
-//***************************************************************************************************************
+    //***************************************************************************************************************
+    //-Setup---------------------------------------------------------------------------------------------------------
+    //***************************************************************************************************************
     private setupCarousel() {
         if (this._subscriber)
             this._subscriber.unsubscribe();
         this.setItemActive(this._activeIndex);
-        this._subscriber = timer(this.period, this.period)
-            .subscribe(() => {
-                this.setItemInactive(this._activeIndex);
-                this._activeIndex = this._activeIndex + 1 >= this.carouselItems.length ? 0 : this._activeIndex + 1;
-                this.setItemActive(this._activeIndex);
-            });
+        if (this.autochange)
+            this._subscriber = interval(this.period)
+                .subscribe(() => {
+                    this.setItemInactive(this._activeIndex);
+                    this._activeIndex = this._activeIndex + 1 >= this.carouselItems.length ? 0 : this._activeIndex + 1;
+                    this.setItemActive(this._activeIndex);
+                });
     }
 
-//***************************************************************************************************************
-//-API-----------------------------------------------------------------------------------------------------------
-//***************************************************************************************************************
+    //***************************************************************************************************************
+    //-API-----------------------------------------------------------------------------------------------------------
+    //***************************************************************************************************************
     selectAt(indexPath: number) {
-        this.setItemInactive(this._activeIndex);
-        this._activeIndex = indexPath >= this.carouselItems.length ? this.carouselItems.length - 1 : indexPath;
-        this._activeIndex = indexPath < 0 ? 0 : indexPath;
-        this.setItemActive(this._activeIndex);
-        this.setupCarousel();
+        if (!this._isAnimation) {
+            this.setItemInactive(this._activeIndex);
+            this._activeIndex = indexPath >= this.carouselItems.length ? this.carouselItems.length - 1 : indexPath;
+            this._activeIndex = indexPath < 0 ? 0 : indexPath;
+            this.setItemActive(this._activeIndex);
+            this.setupCarousel();
+        }
     }
 
     next() {
-        this.setItemInactive(this._activeIndex);
-        this._activeIndex = this._activeIndex + 1 >= this.carouselItems.length ? 0 : this._activeIndex + 1;
-        this.setItemActive(this._activeIndex);
-        this.setupCarousel();
+        if (!this._isAnimation) {
+            this.setItemInactive(this._activeIndex);
+            this._activeIndex = this._activeIndex + 1 >= this.carouselItems.length ? 0 : this._activeIndex + 1;
+            this.setItemActive(this._activeIndex);
+            this.setupCarousel();
+        }
     }
 
     prev() {
-        this.setItemInactive(this._activeIndex);
-        this._activeIndex = this._activeIndex - 1 < 0 ? 0 : this._activeIndex + 1;
-        this.setItemActive(this._activeIndex);
-        this.setupCarousel();
+        if (!this._isAnimation) {
+            this.setItemInactive(this._activeIndex);
+            this._activeIndex = this._activeIndex - 1 < 0 ? this.carouselItems.length - 1 : this._activeIndex - 1;
+            this.setItemActive(this._activeIndex);
+            this.setupCarousel();
+        }
     }
 
-//***************************************************************************************************************
-//-Help----------------------------------------------------------------------------------------------------------
-//***************************************************************************************************************
+    //***************************************************************************************************************
+    //-Help----------------------------------------------------------------------------------------------------------
+    //***************************************************************************************************************
     private setItemActive(index: number) {
         const item = this.carouselItems.find((_, i) => i == index);
-        if (item) item.nativeElement.classList.add('active');
+        switch (this.animationType) {
+            case 'fade':
+                if (item) {
+                    this._isAnimation = true;
+                    item.nativeElement.classList.add('active', 'fade-in');
+                    interval(1005).pipe(first())
+                        .subscribe(() => {
+                            item.nativeElement.classList.remove('fade-in');
+                            this._isAnimation = false;
+                        });
+                }
+                break;
+            default:
+                if (item) item.nativeElement.classList.add('active');
+                break;
+        }
     }
 
     private setItemInactive(index: number) {
         const item = this.carouselItems.find((_, i) => i == index);
-        if (item) item.nativeElement.classList.remove('active');
+        switch (this.animationType) {
+            case 'fade':
+                if (item) {
+                    item.nativeElement.classList.add('fade-out');
+                    interval(1005).pipe(first())
+                        .subscribe(() => {
+                            item.nativeElement.classList.remove('active', 'fade-out');
+                        });
+                }
+                break;
+            default:
+                if (item) item.nativeElement.classList.remove('active');
+                break;
+        }
     }
 
 }

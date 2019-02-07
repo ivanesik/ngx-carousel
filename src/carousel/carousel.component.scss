@@ -1,16 +1,37 @@
-.carousel {
+.carousel { 
 }
 
 .carousel__item {
     display: none;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
 
     &.active {
         display: block;
-        transition: transform 1s ease-in-out;
+    }
+
+    &.fade-out {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        animation: fadeOut 1s linear;
+    }
+    &.fade-in {
+        animation: fadeIn 1s linear;
     }
 
     &.next {
     }
     &.pervious {
     }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
